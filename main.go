@@ -30,5 +30,5 @@ func SaveFileFrom(name string, reader io.Reader) error {
 
 // 接口
 func NotifyTarget(item entity.Item, files []string) error {
-	return utils.NotifyTarget(item)
+	return utils.NotifyTarget(item, files)
 }

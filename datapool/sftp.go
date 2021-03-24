@@ -36,9 +36,9 @@ func (n *DataPool) UploadFile(name string, reader io.Reader) error {
 
 func New(target TargetConfig) *DataPool {
 	var (
-		ssh *ssh.Client
-		ftp *sftp.Client
-		err error
+		sshc *ssh.Client
+		ftpc *sftp.Client
+		err  error
 	)
 
 	auth := []ssh.AuthMethod{ssh.Password(target.Password)}
@@ -52,20 +52,20 @@ func New(target TargetConfig) *DataPool {
 
 	addr := fmt.Sprintf("%s:%d", target.Host, target.Port)
 
-	if ssh, err = ssh.Dial("tcp", addr, conf); err != nil {
+	if sshc, err = ssh.Dial("tcp", addr, conf); err != nil {
 		log.Fatalln("Ssh dial error: ", err)
 		return nil
 	}
 
-	if ftp, err = sftp.NewClient(ssh); err != nil {
+	if ftpc, err = sftp.NewClient(sshc); err != nil {
 		log.Fatalln("SFtp new error: ", err)
 		return nil
 	}
 
-	net := &Network{
-		Client: ftp,
+	pool := &DataPool{
+		Client: ftpc,
 		Target: target,
 	}
 
-	return net
+	return pool
 }
