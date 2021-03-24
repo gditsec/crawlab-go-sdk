@@ -50,7 +50,7 @@ func New(target TargetConfig) *DataPool {
 		HostKeyCallback: ssh.InsecureIgnoreHostKey(),
 	}
 
-	addr := fmt.Sprintf("%s:%d", target.Host, target.Port)
+	addr := fmt.Sprintf("%s:%s", target.Host, target.Port)
 
 	if sshc, err = ssh.Dial("tcp", addr, conf); err != nil {
 		log.Fatalln("Ssh dial error: ", err)
