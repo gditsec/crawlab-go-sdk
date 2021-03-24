@@ -12,7 +12,7 @@ import (
 )
 
 type Response struct {
-	Status  int    `json:"status`
+	Status  string `json:"status`
 	Message string `json:"message"`
 }
 
@@ -33,7 +33,7 @@ func NotifyTarget(item entity.Item, files []string) error {
 	if err := Post(target.Notify, data, response); err != nil {
 		return err
 	}
-	if response.Status != 0 {
+	if response.Status != "ok" {
 		return errors.New(response.Message)
 	}
 	return nil

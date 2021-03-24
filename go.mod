@@ -1,6 +1,6 @@
 module github.com/gditsec/crawlab-go-sdk
 
-go 1.13
+go 1.15
 
 require (
 	github.com/apex/log v1.8.0
