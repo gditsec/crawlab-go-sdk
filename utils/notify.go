@@ -26,7 +26,7 @@ func NotifyTarget(item entity.Item, files []string) error {
 
 	data := entity.Item{
 		"files":  files,
-		"record": record,
+		"record": string(record),
 	}
 
 	response := &Response{}
@@ -34,7 +34,7 @@ func NotifyTarget(item entity.Item, files []string) error {
 		return err
 	}
 	if response.Status != "ok" {
-		return errors.New(response.Message)
+		return errors.New("notify target error: " + response.Message)
 	}
 	return nil
 }
