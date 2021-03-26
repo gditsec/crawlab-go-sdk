@@ -21,7 +21,7 @@ func (n *DataPool) UploadFile(name string, reader io.Reader) error {
 	tmpPath := dstPath + ".temp"
 
 	// 重命名文件
-	defer n.Client.Rename(tmpPath, dstPath)
+	defer n.Client.PosixRename(tmpPath, dstPath)
 
 	dstFile, err := n.Client.Create(tmpPath)
 	if err != nil {
