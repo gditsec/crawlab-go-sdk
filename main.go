@@ -21,11 +21,11 @@ func IsExistItem(item entity.Item) (bool, error) {
 
 func SaveFile(name string, data []byte) error {
 	reader := bytes.NewReader(data)
-	return SaveFileFrom(name, reader)
+	return SaveFileFrom(name, reader, nil)
 }
 
-func SaveFileFrom(name string, reader io.Reader) error {
-	return utils.SaveFileFrom(name, reader)
+func SaveFileFrom(name string, reader io.Reader, timer func()) error {
+	return utils.SaveFileFrom(name, reader, timer)
 }
 
 // 接口

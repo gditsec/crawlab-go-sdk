@@ -16,9 +16,9 @@ type DataPool struct {
 	Target TargetConfig
 }
 
-func (n *DataPool) UploadFile(name string, reader io.Reader) error {
+func (n *DataPool) UploadFile(name string, reader io.Reader, timer func()) error {
 	dstPath := filepath.Join(n.Target.Path, name)
-	tmpPath := dstPath + ".temp"
+	tmpPath := dstPath + "." + time.Now().Format("20060102150405")
 
 	// 重命名文件
 	defer n.Client.PosixRename(tmpPath, dstPath)
@@ -29,7 +29,7 @@ func (n *DataPool) UploadFile(name string, reader io.Reader) error {
 	}
 	defer dstFile.Close()
 
-	_, err = io.Copy(dstFile, reader)
+	_, err = Copy(dstFile, reader, timer)
 
 	return err
 }
