@@ -16,7 +16,7 @@ type Response struct {
 	Message string `json:"message"`
 }
 
-func NotifyTarget(item entity.Item, files []string) error {
+func NotifyTarget(entityType entity.EntityType, item entity.Item, files []string) error {
 	target := datapool.GetTargetConfig()
 
 	record, err := json.MarshalIndent(item, "", "  ")
@@ -25,6 +25,7 @@ func NotifyTarget(item entity.Item, files []string) error {
 	}
 
 	data := entity.Item{
+		"type":   entityType,
 		"files":  files,
 		"record": string(record),
 	}

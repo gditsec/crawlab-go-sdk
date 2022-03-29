@@ -29,6 +29,6 @@ func SaveFileFrom(name string, reader io.Reader, timer func()) error {
 }
 
 // 接口
-func NotifyTarget(item entity.Item, files []string) error {
-	return utils.NotifyTarget(item, files)
+func NotifyTarget(entityType entity.EntityType, item entity.Item, files []string) error {
+	return utils.NotifyTarget(entityType, item, files)
 }
